@@ -19,11 +19,11 @@ jobs:
     - name: Extract Project ZIP
       run: unzip money-master.zip
 
+    - name: Copy Keystore to Root
+      run: cp .github/workflows/debug.keystore . || cp debug.keystore . || true
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-
-    - name: Generate Debug Keystore in Root
-      run: keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
     - name: Build with Gradle
       run: ./gradlew assembleDebug
